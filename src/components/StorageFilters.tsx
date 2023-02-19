@@ -1,5 +1,5 @@
 import CollapsibleList from 'components/CollapsibleList';
-import { getUniqueValues } from 'core/utils';
+import { getUniqueValues, run } from 'core/utils';
 import { useState } from 'react';
 import { useItems } from 'core/hooks';
 import * as Checkbox from '@radix-ui/react-checkbox';
@@ -12,8 +12,8 @@ export default function () {
     const [search, setSearch] = useSearchParams();
     const filteredStorages = search.get('Storages')?.split(',') ?? [];
     const [storages, setStorages] = useState(filteredStorages);
-    const getItems = useItems();
-    const items = getItems.data?.products ?? [];
+    const getItems: any = run();
+    const items = getItems.data || [];
     const allStorages = getUniqueValues<string, Product>(items, 'storage');
     const groupedItems = allStorages
         .map((storage) => ({

@@ -11,7 +11,7 @@ export function useItems(): UseQueryResult<ProductRespone> {
   });
 
   return useQuery(
-    ['items', search.toString()],
+    ['', search.toString()],
     () =>
       apiClient
         .get('items', {

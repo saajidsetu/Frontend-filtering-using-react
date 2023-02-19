@@ -1,5 +1,5 @@
 import CollapsibleList from 'components/CollapsibleList';
-import { getUniqueValues } from 'core/utils';
+import { getUniqueValues, run } from 'core/utils';
 import { useState } from 'react';
 import { useItems } from 'core/hooks';
 import * as Checkbox from '@radix-ui/react-checkbox';
@@ -8,12 +8,17 @@ import { useSearchParams } from 'react-router-dom';
 import FilterToggle from 'components/FilterToggle';
 import { Product } from 'core/types';
 
+
 export default function ColorFilters() {
   const [search, setSearch] = useSearchParams();
   const filteredColors = search.get('colors')?.split(',') ?? [];
   const [colors, setColors] = useState(filteredColors);
-  const getItems = useItems();
-  const items = getItems.data?.products ?? [];
+  const getItems: any = run();
+
+  console.log("getItems", getItems);
+
+
+  const items = getItems.data || [];
   const allColors = getUniqueValues<string, Product>(items, 'color');
   const groupedItems = allColors
     .map((color) => ({
@@ -34,6 +39,7 @@ export default function ColorFilters() {
     setColors(_colors);
   };
   const hasFilters = filteredColors.length > 0;
+
   return (
     <CollapsibleList
       defaultVisible={hasFilters}

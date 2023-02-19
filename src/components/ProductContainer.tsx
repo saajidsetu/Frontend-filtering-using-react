@@ -1,15 +1,22 @@
+import { run } from 'core/utils';
 import React, { useEffect, useState } from 'react';
 export default function ProductContainer() {
   const [product, setPorduct] = useState([])
+  const [url, seturl] = useState('')
 
 
   useEffect(() => {
 
-    fetch('data.json')
-      .then(response => response.json())
-      .then(json => setPorduct(json))
+    const getItems: any = run();
+    const items = getItems.data || [];
 
-  }, [])
+    console.log("iteffffffms", items);
+
+    setPorduct(items)
+    // seturl('')
+    const params: any = new URLSearchParams(window.location.search);
+    seturl(params)
+  }, [url])
 
 
   return (

@@ -8,14 +8,16 @@ import ColorFilters from 'components/ColorFilters';
 import PriceFilter from 'components/PriceFilter';
 import StorageFilters from 'components/StorageFilters';
 import ProductContainer from 'components/ProductContainer';
+import { run } from 'core/utils';
 
 export default function Root() {
   const [search, setSearch] = useSearchParams();
-  const getItems = useItems();
-  const items = useMemo(() => getItems.data?.products ?? [], [getItems.data]);
+  // const getItems = useItems();
+  const getItems: any = run();
+  const items = useMemo(() => getItems.data || [], [getItems]);
   const itemCounts = useMemo(
     () =>
-      items.reduce<Record<string, number>>((initial, item) => {
+      items.reduce((initial: any, item: any) => {
         if (!isNaN(initial[item.category])) {
           initial[item.category] += 1;
         } else {
@@ -26,7 +28,7 @@ export default function Root() {
       }, {}),
     [items],
   );
-  const maxPrice = (getItems.data?.maxPrice ?? 0) / 100;
+  const maxPrice = (getItems?.maxPrice ?? 0)
 
   return (
     <div className="mw9 center ph4 bg-white min-vh-100 br bl b--light-gray">
@@ -100,8 +102,8 @@ export default function Root() {
           </div>
         </div>
 
-        <ItemsContainer />
-        {/* <ProductContainer /> */}
+        {/* <ItemsContainer /> */}
+        <ProductContainer />
       </div>
     </div>
   );

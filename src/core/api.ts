@@ -5,8 +5,8 @@ import { QueryClient } from 'react-query';
 const baseURL = 'http://localhost:3001'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3001',
-  // baseURL: baseURL,
+  // baseURL: 'data.json',
+  baseURL: baseURL,
 });
 
 const queryClient = new QueryClient();
