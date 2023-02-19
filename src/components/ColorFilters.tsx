@@ -34,7 +34,6 @@ export default function ColorFilters() {
     setColors(_colors);
   };
   const hasFilters = filteredColors.length > 0;
-
   return (
     <CollapsibleList
       defaultVisible={hasFilters}

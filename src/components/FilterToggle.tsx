@@ -9,6 +9,9 @@ export default function FilterToggle({
   onClear: () => void;
   onApply: () => void;
 }) {
+
+  console.log("active", active);
+
   if (active) {
     return (
       <button onClick={onClear} className="btn ph3 pv1 br3 f6 ba b--moon-gray">

@@ -10,7 +10,7 @@ import { Product } from 'core/types';
 
 export default function () {
     const [search, setSearch] = useSearchParams();
-    const filteredStorages = search.get('storages')?.split(',') ?? [];
+    const filteredStorages = search.get('Storages')?.split(',') ?? [];
     const [storages, setStorages] = useState(filteredStorages);
     const getItems = useItems();
     const items = getItems.data?.products ?? [];

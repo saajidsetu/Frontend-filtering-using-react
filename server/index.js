@@ -27,7 +27,27 @@ function containsColors(colors, product) {
   return false;
 }
 
-function applyFilters(products, { query, sort, colors, minPrice, maxPrice }) {
+
+
+function containsStorage(colors, product) {
+  // base case, do not skip products when there are no color filters
+  if (!colors) return true;
+
+  const selectedColors = new Set(colors.split(','));
+  const productColors = product.storage;
+
+  // check if any of the product colors are in the filter
+  for (const color of productColors) {
+    if (selectedColors.has(color)) {
+      return true;
+    }
+  }
+
+  // does not contain any of the filtered colors, skip this product
+  return false;
+}
+
+function applyFilters(products, { query, sort, colors, minPrice, maxPrice, Storages }) {
   const filteredProducts = [];
 
   // skip products based on filters
@@ -37,6 +57,10 @@ function applyFilters(products, { query, sort, colors, minPrice, maxPrice }) {
     }
 
     if (!containsColors(colors, product)) {
+      continue;
+    }
+
+    if (!containsStorage(Storages, product)) {
       continue;
     }
 

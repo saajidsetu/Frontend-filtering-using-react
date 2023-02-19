@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import ColorFilters from 'components/ColorFilters';
 import PriceFilter from 'components/PriceFilter';
 import StorageFilters from 'components/StorageFilters';
+import ProductContainer from 'components/ProductContainer';
 
 export default function Root() {
   const [search, setSearch] = useSearchParams();
@@ -74,8 +75,8 @@ export default function Root() {
               </li>
               <li>
                 <button className="btn bn fw5 pa0 pv2 w-100 tl bg-transparent hover-light-purple flex justify-between">
-                  Bags
-                  <span>{itemCounts['bags'] ?? 0}</span>
+                  Phones
+                  <span>{itemCounts['phones'] ?? 0}</span>
                 </button>
               </li>
               <li>
@@ -94,11 +95,13 @@ export default function Root() {
 
             <ColorFilters />
             <StorageFilters />
+
             <PriceFilter maxPrice={maxPrice} />
           </div>
         </div>
 
         <ItemsContainer />
+        {/* <ProductContainer /> */}
       </div>
     </div>
   );
